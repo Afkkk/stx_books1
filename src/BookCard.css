@@ -1,0 +1,18 @@
+.BookCard__card{
+width: 250px;
+height: 400px;
+border: 1px solid black;
+overflow: hidden;
+margin: auto;
+border-radius: 5px;
+}
+.BookCard__cardtext{
+height: 150px;
+padding: 10px;
+font-size: small;
+}
+.BookCard__image{
+    margin: 20px;
+    height: 160px;
+}
+
