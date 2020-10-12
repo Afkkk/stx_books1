@@ -7,12 +7,15 @@ const BookList = (props) => {
         <div className="BookList__list">
             {
                 props.books.map((book, i)=>{
-                    return <BookCard 
-                    key={i}
-                    image={book.volumeInfo.imageLinks.thumbnail}
-                    title={book.volumeInfo.title}
-                    description={book.volumeInfo.description}
 
+                    return <BookCard 
+                    
+                    key={i}
+                    url={book.volumeInfo.previewLink}
+                    ttitle={book.volumeInfo.title?book.volumeInfo.title:"No Title"}
+                    description={book.volumeInfo.description?book.volumeInfo.description:"No Description"}
+                    image={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail: "Loading..." }
+                    
                      />
                 })
             }

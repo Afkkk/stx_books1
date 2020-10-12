@@ -5,11 +5,12 @@ import TextTruncate from 'react-text-truncate';
 const BookCard = (props) => {
     return (
         <div className="BookCard__card">
-            <img src={props.image} alt="" className="BookCard__image" />
-            <div className="BookCard__cardtext">
+               
+               <a href={props.url} target="_blank"><img src={props.image} alt="Loading..."  className="BookCard__image" /></a>  
+                <div className="BookCard__cardtext">
                 <h4>{props.title}</h4>
                 <p><TextTruncate
-                line={4}
+                line={2}
                 element="span"
                 truncateText="..."
                 text={props.description}               

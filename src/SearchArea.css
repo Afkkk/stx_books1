@@ -1,0 +1,67 @@
+.SearchArea__text{
+    font-size: 2vw;
+    
+}
+
+.SearchArea__titleText{
+    font-size: 6vw;
+    margin: 0;
+}
+
+.SearchArea__holderDiv{
+    
+    padding: 1vw;
+    
+}
+.SearchArea__holderForm{
+    margin: 2vw;
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+
+  
+}
+.SearchArea__buttonSubmit{
+    background-color: lightgray !important;
+    margin: auto !important;
+    width: 12vw;
+    grid-column-start: 6;
+    grid-column-end: 7;
+    text-align: center;
+    padding: 16px 14px !important;
+    
+    
+}
+.SearchArea__textInput{
+    background-color: lightgray;
+    width: 12vw;
+}
+.SearchArea__selectInput{
+    background-color: lightgray;
+    width: 12vw;
+}
+.SearchArea__IconSearch{
+    font-size: 5vw !important;
+    
+}
+.SearchArea__textHidden{
+    text-indent: 100%;
+    overflow: hidden;
+    color: transparent;
+    font-size: 2vw;
+}
+.SearchArea__buttonSubmitP{
+    grid-column-start: 6;
+    grid-column-end: 7;
+}
+.SearchArea__textP1{
+    grid-column-start: 2;
+}
+.SearchArea__textP2{
+    grid-column-start: 3;
+}
+.SearchArea__textP3{
+    grid-column-start: 4;
+}
+.SearchArea__textP4{
+    grid-column-start: 5;
+}
