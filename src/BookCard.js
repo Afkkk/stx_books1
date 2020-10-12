@@ -6,7 +6,7 @@ const BookCard = (props) => {
     return (
         <div className="BookCard__card">
                
-               <a href={props.url} target="_blank"><img src={props.image} alt="Loading..."  className="BookCard__image" /></a>  
+              <a href={props.url} target = "_blank"  rel="noopener noreferrer"><img src={props.image} alt="Loading..."  className="BookCard__image" /></a>  
                 <div className="BookCard__cardtext">
                 <h4>{props.title}</h4>
                 <p><TextTruncate

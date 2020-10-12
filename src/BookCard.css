@@ -1,4 +1,3 @@
-
 .BookCard__card{
     width: 31vw;
     border: 1px solid black;
@@ -11,7 +10,7 @@
     text-align: center;
     height: 150px;
     padding: 0.5vw;
-    font-size: small;
+    font-size: 1rem;
     
 }
 .BookCard__image{

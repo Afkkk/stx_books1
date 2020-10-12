@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component} from 'react';
 import SearchArea from './SearchArea.js'
 import request from 'superagent';
 import BookList from './BookList.js';
 import API_KEY from './requests.js';
-//import Axios from 'axios';
+
 
 
 class Book extends Component{
 
     
-
+    
     constructor(props){
         super(props);
         this.state = {
@@ -17,115 +17,132 @@ class Book extends Component{
             searchField: "",
             searchAuthor: "",
             searchSubject: "",
-            choseFilter: "partial"
+            choseFilter: "partial",
+            startIndex: 0,
+            
         }
+        
     }
+
 
      searchBookByName = (e) =>{
        e.preventDefault();
-
+       
+       
+    
 
         if(this.state.searchField!==""&&this.state.searchAuthor===""&&this.state.searchSubject==="")//szukanie po Tytule
-        {
-            console.log("if1")
+        {   
             request
-            .get("https://www.googleapis.com/books/v1/volumes?q="+this.state.searchField+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
+            .get("https://www.googleapis.com/books/v1/volumes?q="+this.state.searchField+"&startIndex="+this.state.startIndex+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
             .then((data) =>{
-                console.log(data.body.items);
-                this.setState({ books: [...data.body.items]})
+                 if(data.body.items){
+                     this.setState({books: [...this.state.books,...data.body.items]})
+                 }
+                 
+                //this.setState({books:[...data.body.items]?{books: [...this.state.books,...data.body.items]}:console.log("brak wyszukiwan")})
             })
         }else if(this.state.searchField===""&&this.state.searchAuthor!==""&&this.state.searchSubject==="")//szukanie po Autorze
         {
-            console.log("if2")
             request
-            .get("https://www.googleapis.com/books/v1/volumes?q=+inauthor:"+this.state.searchAuthor+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
+            .get("https://www.googleapis.com/books/v1/volumes?q=+inauthor: "+this.state.searchAuthor+"&startIndex="+this.state.startIndex+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
             .then((data) =>{
-                console.log(data.body.items);
-                this.setState({ books: [...data.body.items]})
+                if(data.body.items){
+                    this.setState({books: [...this.state.books,...data.body.items]})
+                }
             })
         }else if(this.state.searchField===""&&this.state.searchAuthor===""&&this.state.searchSubject!=="")//szukanie po Temacie
         {
-            console.log("if3")
             request
-            .get("https://www.googleapis.com/books/v1/volumes?q=+subject:"+this.state.searchSubject+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
+            .get("https://www.googleapis.com/books/v1/volumes?q=+subject: "+this.state.searchSubject+"&startIndex="+this.state.startIndex+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
             .then((data) =>{
-                console.log(data.body.items);
-                this.setState({ books: [...data.body.items]})
+                if(data.body.items){
+                    this.setState({books: [...this.state.books,...data.body.items]})
+                    console.log("jest")
+                }
         })
         }else if(this.state.searchField!==""&&this.state.searchAuthor!==""&&this.state.searchSubject==="")//szukanie po Tytule i Autorze
             {
-                console.log("if4")
             request
-            .get("https://www.googleapis.com/books/v1/volumes?q="+this.state.searchField+"+inauthor:"+this.state.searchAuthor+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
+            .get("https://www.googleapis.com/books/v1/volumes?q="+this.state.searchField+"+inauthor: "+this.state.searchAuthor+"&startIndex="+this.state.startIndex+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
             .then((data) =>{
-                console.log(data.body.items);
-                this.setState({ books: [...data.body.items]})
+                if(data.body.items){
+                    this.setState({books: [...this.state.books,...data.body.items]})
+                }
             })
         }
         else if(this.state.searchField!==""&&this.state.searchAuthor===""&&this.state.searchSubject!=="")//szukanie po Tytule i Temacie
         {
-            console.log("if5")
             request
-            .get("https://www.googleapis.com/books/v1/volumes?q="+this.state.searchField+"+subject:"+this.state.searchSubject+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
+            .get("https://www.googleapis.com/books/v1/volumes?q="+this.state.searchField+"+subject: "+this.state.searchSubject+"&startIndex="+this.state.startIndex+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
             .then((data) =>{
-                console.log(data.body.items);
-                this.setState({ books: [...data.body.items]})
+                if(data.body.items){
+                    this.setState({books: [...this.state.books,...data.body.items]})
+                }
             })
 
         }
         else if(this.state.searchField===""&&this.state.searchAuthor!==""&&this.state.searchSubject!=="")//szukanie po Autorze i Temacie
         {
-            console.log("if6")
             request
-            .get("https://www.googleapis.com/books/v1/volumes?q=inauthor:"+this.state.searchAuthor+"&subject:"+this.state.searchSubject+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
+            .get("https://www.googleapis.com/books/v1/volumes?q=inauthor: "+this.state.searchAuthor+"&subject: "+this.state.searchSubject+"&startIndex="+this.state.startIndex+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
             .then((data) =>{
-                console.log(data.body.items);
-                this.setState({ books: [...data.body.items]})
+                if(data.body.items){
+                    this.setState({books: [...this.state.books,...data.body.items]})
+                }
             })
 
 
         }
-        else//inne przypadki
+        else if(this.state.searchField!==""&&this.state.searchAuthor!==""&&this.state.searchSubject!=="")//szukanie po każdym polu 
         {
-            console.log("if7")
             request
-            .get("https://www.googleapis.com/books/v1/volumes?q="+this.state.searchField+"+inauthor:"+this.state.searchAuthor+"&subject"+this.state.searchSubject+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
+            .get("https://www.googleapis.com/books/v1/volumes?q="+this.state.searchField+"+inauthor: "+this.state.searchAuthor+"&subject: "+this.state.searchSubject+"&startIndex="+this.state.startIndex+"&key="+API_KEY+"&maxResults=12&filter="+this.state.choseFilter)
             .then((data) =>{
-                console.log(data.body.items);
-                this.setState({ books: [...data.body.items]})
+                if(data.body.items){
+                    this.setState({books: [...this.state.books,...data.body.items]})
+                }
             })
 
         }
-        
-         
+       
+        this.setState({startIndex: this.state.startIndex+12})
      }
-    
 
 
     handleSearch = (e) =>{
-        console.log(e.target.value)
         this.setState({searchField: e.target.value })
+        this.setState({startIndex:0})
+        this.setState({ books: []})
     }
 
     handleAuthor = (e) =>{
-        console.log(e.target.value)
         this.setState({searchAuthor: e.target.value})
+        this.setState({startIndex:0})
+        this.setState({ books: []})
     }
 
     handleSubject = (e) =>{
-        console.log(e.target.value)
         this.setState({searchSubject: e.target.value})
-    }
-    handleFilter = (e) =>{
-        console.log(e.target.value)
-        this.setState({choseFilter: e.target.value})
+        this.setState({startIndex:0})
+        this.setState({ books: []})
     }
 
+    handleFilter = (e) =>{
+        this.setState({choseFilter: e.target.value})
+        this.setState({startIndex:0})
+        this.setState({ books: []})
+    }
+
+
     render(){
+        
+
         return(
             <div>
                 <SearchArea searchBookByName={this.searchBookByName} handleSearch={this.handleSearch} handleAuthor={this.handleAuthor} handleSubject={this.handleSubject} handleFilter={this.handleFilter}/>
-                <BookList books={this.state.books}/> 
+                <BookList books={this.state.books} /> 
+                
             </div>
         );
     }
